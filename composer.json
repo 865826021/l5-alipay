@@ -1,0 +1,23 @@
+{
+    "name": "imvkmark/l5-alipay",
+	"description": "支付宝Laravel 5 插件. 支持web 端即时到帐",
+    "authors": [
+        {
+            "name": "Mark Zhao",
+            "email": "zhaody901@126.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "Imvkmark\\L5Alipay\\": "src/Imvkmark/L5Alipay"
+        }
+    },
+    "minimum-stability": "dev"
+}
