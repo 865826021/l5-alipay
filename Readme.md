@@ -21,10 +21,10 @@ composer require imvkmark/l5-alipay dev-master
 找到 `config/app.php` 配置文件中，key为 `providers` 的数组，在数组中添加服务提供者。
 
 ```php
-    'providers' => [
-        // ...
-        Imvkmark\L5Alipay\L5AlipayServiceProvider::class,
-    ]
+'providers' => [
+    // ...
+    Imvkmark\L5Alipay\L5AlipayServiceProvider::class,
+]
 ```
 
 运行 `php artisan vendor:publish` 命令，发布配置文件到你的项目中。
@@ -56,59 +56,58 @@ return redirect()->to($alipay->getPayLink());
 #### 网页
 
 ```php
-	/**
-	 * 异步通知
-	 */
-	public function webNotify()
-	{
-		// 验证请求。
-		if (! app('lemon.alipay.web-direct')->verify()) {
-			Log::notice('Alipay notify post data verification fail.', [
-				'data' => Request::instance()->getContent()
-			]);
-			return 'fail';
-		}
+/**
+ * 异步通知
+ */
+public function webNotify()
+{
+    // 验证请求。
+    if (! app('lemon.alipay.web-direct')->verify()) {
+        Log::notice('Alipay notify post data verification fail.', [
+        'data' => Request::instance()->getContent()
+    ]);
+    return 'fail';
+}
 
-		// 判断通知类型。
-		switch (Input::get('trade_status')) {
-			case 'TRADE_SUCCESS':
-			case 'TRADE_FINISHED':
-				// TODO: 支付成功，取得订单号进行其它相关操作。
-				Log::debug('Alipay notify post data verification success.', [
-					'out_trade_no' => Input::get('out_trade_no'),
-					'trade_no' => Input::get('trade_no')
-				]);
-				break;
-		}
+    // 判断通知类型。
+    switch (Input::get('trade_status')) {
+        case 'TRADE_SUCCESS':
+        case 'TRADE_FINISHED':
+            // TODO: 支付成功，取得订单号进行其它相关操作。
+            Log::debug('Alipay notify post data verification success.', [
+                'out_trade_no' => Input::get('out_trade_no'),
+                'trade_no' => Input::get('trade_no')
+            ]);
+        break;
+    }
+    return 'success';
+}
 
-		return 'success';
-	}
+/**
+ * 同步通知
+ */
+public function webReturn()
+{
+    // 验证请求。
+    if (! app('lemon.alipay.web-direct')->verify()) {
+        Log::notice('Alipay return query data verification fail.', [
+            'data' => Request::getQueryString()
+        ]);
+        return view('alipay.fail');
+    }
 
-	/**
-	 * 同步通知
-	 */
-	public function webReturn()
-	{
-		// 验证请求。
-		if (! app('lemon.alipay.web-direct')->verify()) {
-			Log::notice('Alipay return query data verification fail.', [
-				'data' => Request::getQueryString()
-			]);
-			return view('alipay.fail');
-		}
+    // 判断通知类型。
+    switch (Input::get('trade_status')) {
+        case 'TRADE_SUCCESS':
+        case 'TRADE_FINISHED':
+            // TODO: 支付成功，取得订单号进行其它相关操作。
+            Log::debug('Alipay notify get data verification success.', [
+                'out_trade_no' => Input::get('out_trade_no'),
+                'trade_no' => Input::get('trade_no')
+            ]);
+            break;
+    }
 
-		// 判断通知类型。
-		switch (Input::get('trade_status')) {
-			case 'TRADE_SUCCESS':
-			case 'TRADE_FINISHED':
-				// TODO: 支付成功，取得订单号进行其它相关操作。
-				Log::debug('Alipay notify get data verification success.', [
-					'out_trade_no' => Input::get('out_trade_no'),
-					'trade_no' => Input::get('trade_no')
-				]);
-				break;
-		}
-
-		return view('alipay.success');
-	}
+	return view('alipay.success');
+}
 ```
