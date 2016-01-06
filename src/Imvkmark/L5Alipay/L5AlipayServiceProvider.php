@@ -30,7 +30,7 @@ class L5AlipayServiceProvider extends ServiceProvider {
 		// 配置文件合并
 		$this->mergeConfigFrom(__DIR__ . '/../../config/alipay.php', 'lm-alipay');
 
-		$this->app->bind('lemon.alipay.direct-pay', function ($app) {
+		$this->app->bind('lemon.alipay.web-direct', function ($app) {
 			$alipay = new WebDirect\SdkPayment();
 			/** @type ConfigRepository $config */
 			$config = $app->config;
@@ -50,7 +50,7 @@ class L5AlipayServiceProvider extends ServiceProvider {
 	 * @return array
 	 */
 	public function provides() {
-		return ['lemon.alipay.direct-pay'];
+		return ['lemon.alipay.web-direct'];
 	}
 
 }
