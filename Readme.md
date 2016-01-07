@@ -12,6 +12,11 @@ composer require imvkmark/l5-alipay dev-master
 
 更新你的依赖包 ```composer update``` 或者全新安装 ```composer install```。
 
+## 发布配置
+
+```
+php artisan vendor:publish
+```
 
 ## 使用
 
