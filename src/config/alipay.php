@@ -20,15 +20,15 @@ return [
 	*/
 
 	// 安全检验码，以数字和字母组成的32位字符
-	'direct_pay_key'        => 'L5_ALIPAY_DIRECT_PAY_KEY',
+	'web_direct_key'        => 'L5_ALIPAY_DIRECT_PAY_KEY',
 
 	// 签名方式
-	'direct_pay_sign_type'  => 'MD5',
+	'web_direct_sign_type'  => 'MD5',
 
 	// 服务器异步通知页面路径
-	'direct_pay_notify_url' => 'charge-notify',
+	'web_direct_notify_url' => 'charge-notify',
 
 	// 页面跳转同步通知页面路径
-	'direct_pay_return_url' => 'charge-callback',
+	'web_direct_return_url' => 'charge-callback',
 
 ];

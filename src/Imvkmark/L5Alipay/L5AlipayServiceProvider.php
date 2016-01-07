@@ -37,9 +37,9 @@ class L5AlipayServiceProvider extends ServiceProvider {
 			$alipay->setPartner($config->get('lm-alipay.partner_id'))
 				->setSellerId($config->get('lm-alipay.seller_id'))
 				->setKey($config->get('lm-alipay.web_direct_key'))
-				->setSignType($config->get('lm-alipay.direct_pay_sign_type'))
-				->setNotifyUrl($config->get('lm-alipay.direct_pay_notify_url'))
-				->setReturnUrl($config->get('lm-alipay.direct_pay_return_url'))
+				->setSignType($config->get('lm-alipay.web_direct_sign_type'))
+				->setNotifyUrl($config->get('lm-alipay.web_direct_notify_url'))
+				->setReturnUrl($config->get('lm-alipay.web_direct_return_url'))
 				->setExterInvokeIp($app->request->getClientIp());
 			return $alipay;
 		});
