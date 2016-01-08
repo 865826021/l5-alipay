@@ -19,7 +19,7 @@ class L5AlipayServiceProvider extends ServiceProvider {
 		// 加载的时候进行配置项的发布
 		$this->publishes([
 			__DIR__ . '/../../config/alipay.php' => config_path('lm-alipay.php'),
-		]);
+		], 'lemon');
 	}
 
 	/**

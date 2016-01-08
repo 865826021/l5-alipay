@@ -1,8 +1,6 @@
 # Alipay 在 Laravel 5 的封装包
 
-Fork from [Latrell/Alipay](https://github.com/Latrell/Alipay)
-
-该拓展包想要达到在Laravel5框架下，便捷使用支付宝的目的。
+修改自 [Latrell/Alipay](https://github.com/Latrell/Alipay), 目的是在 Laravel5框架下更便捷使用支付宝付款功能。
 
 ## 安装
 
@@ -12,18 +10,13 @@ composer require imvkmark/l5-alipay dev-master
 
 更新你的依赖包 ```composer update``` 或者全新安装 ```composer install```。
 
-## 发布配置
 
-```
-php artisan vendor:publish
-```
 
 ## 使用
 
-要使用支付宝SDK服务提供者，你必须自己注册服务提供者到Laravel服务提供者列表中。
-基本上有两种方法可以做到这一点。
+要使用支付宝SDK服务提供者，必须自己注册服务提供者到Laravel服务提供者列表中。
 
-找到 `config/app.php` 配置文件中，key为 `providers` 的数组，在数组中添加服务提供者。
+找到 `config/app.php` 配置文件中，key为 `providers` 的数组，在数组中添加服务提供者。 Laravel 5
 
 ```php
 'providers' => [
@@ -32,18 +25,17 @@ php artisan vendor:publish
 ]
 ```
 
-运行 `php artisan vendor:publish` 命令，发布配置文件到你的项目中。
+运行 `php artisan vendor:publish --tag=lemon` 命令，发布配置文件到你的项目中。
 
 配置文件 `config/lm-alipay.php` 为公共配置信息文件， `web_direct_` 为Web版支付宝SDK配置前缀。
 
 ## 例子
 
-### 支付申请
+### 支付申请  Web 版即时到账 (web_direct)
 
-#### Web 版即时到账 (web_direct)
+#### 创建支付单
 
 ```php
-// 创建支付单。
 $alipay = app('lemon.alipay.web-direct');
 $alipay->setOutTradeNo('order_id');
 $alipay->setTotalFee('order_price');
@@ -56,9 +48,8 @@ $alipay->setQrPayMode(2);
 return redirect()->to($alipay->getPayLink());
 ```
 
-### 结果通知
 
-#### 网页
+#### 网页 结果通知
 
 ```php
 /**
