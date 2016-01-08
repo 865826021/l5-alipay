@@ -12,7 +12,7 @@ class L5AlipayServiceProvider extends ServiceProvider {
 	protected $defer = false;
 
 	/**
-	 * Bootstrap the application events.
+	 * Bootstrap the application events
 	 * @return void
 	 */
 	public function boot() {
