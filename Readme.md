@@ -32,8 +32,17 @@ php artisan vendor:publish
 
 运行 `php artisan vendor:publish` 命令，发布配置文件到你的项目中。
 
-配置文件 `config/lm-alipay.php` 为公共配置信息文件， `web_direct_` 为Web版支付宝SDK配置前缀。
+配置文件 `config/l5-alipay.php` 为公共配置信息文件， `web_direct_` 为Web版支付宝SDK配置前缀。
+配置 回调地址的时候使用 url 函数， 填写的是完整的回调地址， 不是部分地址， 例如填写
 
+```
+// 服务器异步通知页面路径
+'web_direct_notify_url' => env('URL_SITE') . '/callback/alipay-charge-notify',
+
+// 页面跳转同步通知页面路径
+// 这里不支持url， config 函数调用
+'web_direct_return_url' => env('URL_SITE') . '/finance/alipay-charge-callback',
+```
 ## 例子
 
 ### 支付申请
@@ -42,7 +51,7 @@ php artisan vendor:publish
 
 ```php
 // 创建支付单。
-$alipay = app('lemon.alipay.web-direct');
+$alipay = app('l5.alipay.web-direct');
 $alipay->setOutTradeNo('order_id');
 $alipay->setTotalFee('order_price');
 $alipay->setSubject('goods_name');
@@ -65,7 +74,7 @@ return redirect()->to($alipay->getPayLink());
 public function webNotify()
 {
     // 验证请求。
-    if (! app('lemon.alipay.web-direct')->verify()) {
+    if (! app('l5.alipay.web-direct')->verify()) {
         Log::notice('Alipay notify post data verification fail.', [
         'data' => Request::instance()->getContent()
     ]);
@@ -92,7 +101,7 @@ public function webNotify()
 public function webReturn()
 {
     // 验证请求。
-    if (! app('lemon.alipay.web-direct')->verify()) {
+    if (! app('l5.alipay.web-direct')->verify()) {
         Log::notice('Alipay return query data verification fail.', [
             'data' => Request::getQueryString()
         ]);

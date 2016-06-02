@@ -7,10 +7,10 @@ return [
 	*/
 
 	// 合作身份者id，以2088开头的16位纯数字。
-	'partner_id'            => 'L5_ALIPAY_PARTNER_ID',
+	'partner_id'              => env('L5_ALIPAY_PARTNER_ID'),
 
 	// 卖家支付宝帐户
-	'seller_id'             => 'L5_ALIPAY_SELL_ID',
+	'seller_id'               => env('L5_ALIPAY_SELL_ID'),
 
 
 	/*
@@ -20,15 +20,33 @@ return [
 	*/
 
 	// 安全检验码，以数字和字母组成的32位字符
-	'web_direct_key'        => 'L5_ALIPAY_DIRECT_PAY_KEY',
+	'web_direct_key'          => env('L5_ALIPAY_WEB_DIRECT_KEY'),
 
 	// 签名方式
-	'web_direct_sign_type'  => 'MD5',
+	'web_direct_sign_type'    => 'MD5',
 
 	// 服务器异步通知页面路径
-	'web_direct_notify_url' => 'charge-notify',
+	'web_direct_notify_url'   => 'charge-notify',
 
 	// 页面跳转同步通知页面路径
-	'web_direct_return_url' => 'charge-callback',
+	'web_direct_return_url'   => 'charge-callback',
+
+	/*
+	|--------------------------------------------------------------------------
+	| 移动支付配置项目
+	|--------------------------------------------------------------------------
+	*/
+
+	// 签名方式
+	'mobile_sign_type'        => 'RSA',
+
+	// 私钥
+	'mobile_private_key_path' => '',
+
+	// 公约
+	'mobile_public_key_path'  => '',
+
+	// 异步通知地址
+	'mobile_notify_url'       => 'mobile-notify',
 
 ];

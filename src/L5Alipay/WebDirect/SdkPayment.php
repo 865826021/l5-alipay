@@ -1,9 +1,9 @@
-<?php
-namespace Imvkmark\L5Alipay\WebDirect;
+<?php namespace Imvkmark\L5Alipay\WebDirect;
+
 /*
- * 即时到帐
+ * Web 即时到帐
  * @url https://doc.open.alipay.com/doc2/detail.htm?spm=0.0.0.0.s8xViV&treeId=62&articleId=103566&docType=1
- * @author     Mark <zhaody901@qq.com>
+ * @author     Mark <zhaody901@126.com>
  * @copyright  Copyright (c) 2013-2015 Sour Lemon Team
  */
 class SdkPayment {
@@ -132,7 +132,7 @@ class SdkPayment {
 	private $qr_pay_mode;
 
 	public function __construct() {
-		$this->cacert = getcwd() . '\\cacert.pem';
+		$this->cacert = getcwd() . '/../../resources/cacert.pem';
 	}
 
 	/**
